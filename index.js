@@ -21,7 +21,9 @@ module.exports = {
   },
 
   included: function(app) {
-    app.options.storeConfigInMeta = false;
+    if (this.hasRailsEnv()) {
+      app.options.storeConfigInMeta = false;
+    }
 
     if (process.env.DISABLE_FINGERPRINTING === 'true') {
       app.options.fingerprint = app.options.fingerprint || {};
@@ -66,5 +68,8 @@ module.exports = {
   },
   errorFilePath: function() {
     return path.join(this.tmpDir(), 'error.txt');
+  },
+  hasRailsEnv: function() {
+    return process.env.RAILS_ENV !== 'undefined';
   }
 };
