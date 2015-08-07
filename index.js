@@ -70,6 +70,6 @@ module.exports = {
     return path.join(this.tmpDir(), 'error.txt');
   },
   hasRailsEnv: function() {
-    return process.env.RAILS_ENV !== 'undefined';
+    return (typeof process.env.RAILS_ENV !== 'undefined');
   }
 };
